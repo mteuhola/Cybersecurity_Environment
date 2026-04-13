@@ -100,7 +100,7 @@ const courses: Course[] = [
     number: 'Aihe 3',
     title: 'Romanssihuijaukset',
     description:
-      'Opi tunnistamaan verkossa tapahtuvat tunne-manipulaatiot ja suojelemaan itseäsi, jos jokin tuntuu liian hyvältä ollakseen totta.',
+      'Opi tunnistamaan verkossa tapahtuvaa tunnemanipulaatiota ja tunnistamaan, jos jokin tuntuu liian hyvältä ollakseen totta.',
     duration: 'Noin 15 minuuttia',
     exercises: '4 harjoitusta · 1 tietovisa',
     accentColor: '#993556',
