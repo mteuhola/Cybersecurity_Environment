@@ -1,48 +1,21 @@
-# ======================
-# .NET / ASP.NET Core
-# ======================
+# --
+# Python
+# --
 
-## Build output
-bin/
-obj/
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.env
+dist/
+*.egg-info/
+.pytest_cache/
 
-## Visual Studio files
-.vs/
-*.user
-*.suo
-*.userosscache
-*.sln.docstates
-*.userprefs
-
-## Publish output
-publish/
-**/publish/
-
-## NuGet
-*.nupkg
-*.snupkg
-.nuget/
-packages/
-!**/packages/repositories.config
-
-## App settings with secrets (keep appsettings.json, ignore local overrides)
-appsettings.Development.json
-appsettings.Local.json
-
-## Entity Framework migrations (optional – remove if you want to track migrations)
-# **/Migrations/
-
-## Rider / JetBrains
-.idea/
-*.sln.iml
-
-## Roslyn
-*.roslynanalyzer
-
-
-# ======================
+# --
 # React / TypeScript / Node
-# ======================
+# --
 
 ## Dependencies
 node_modules/
@@ -72,22 +45,9 @@ coverage/
 .env.production.local
 
 
-# ======================
-# Azure
-# ======================
-
-## Azure Functions local settings
-local.settings.json
-
-## Terraform / Bicep state (if used for IaC)
-.terraform/
-*.tfstate
-*.tfstate.backup
-
-
-# ======================
+# --
 # Editors & OS
-# ======================
+# --
 
 ## VS Code (keep shared settings, ignore personal)
 .vscode/*
@@ -109,9 +69,9 @@ Desktop.ini
 *~
 
 
-# ======================
+# --
 # Logs & misc
-# ======================
+# --
 
 logs/
 *.log
