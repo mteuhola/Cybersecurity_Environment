@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import styles from './CourseSelection.module.css'
+import { LockIcon, EmailIcon, MaskIcon, ClockIcon, ArrowIcon } from '../../components/icons.tsx'
 
 interface Course {
   id: string
@@ -17,58 +18,13 @@ interface Course {
   icon: React.ReactNode
 }
 
-const LockIcon = ({ color }: { color: string }) => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <rect x="5" y="11" width="14" height="10" rx="2" stroke={color} strokeWidth="1.5" />
-    <path d="M8 11V7a4 4 0 018 0v4" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-    <circle cx="12" cy="16" r="1.5" fill={color} />
-  </svg>
-)
-
-const EmailIcon = ({ color }: { color: string }) => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <rect x="3" y="6" width="18" height="13" rx="2" stroke={color} strokeWidth="1.5" />
-    <path d="M3 9l9 6 9-6" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-    <path d="M15 14l3-3M15 11l3 3" stroke="#E24B4A" strokeWidth="1.5" strokeLinecap="round" />
-  </svg>
-)
-
-const HeartIcon = ({ color }: { color: string }) => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path
-      d="M12 21C12 21 4 15 4 9a5 5 0 0110 0 5 5 0 0110 0c0 6-8 12-8 12h-4z"
-      stroke={color}
-      strokeWidth="1.5"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M12 9l1.5 2.5L16 12l-2.5 1.5L12 16l-1.5-2.5L8 12l2.5-1.5L12 9z"
-      fill={color}
-      opacity="0.5"
-    />
-  </svg>
-)
-
-const ArrowIcon = () => (
-  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-    <path d="M2 6h8M7 3l3 3-3 3" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-)
-
-const ClockIcon = ({ color = '#888780' }: { color?: string }) => (
-  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-    <circle cx="6" cy="6" r="5" stroke={color} />
-    <path d="M6 3.5V6l2 1.5" stroke={color} strokeWidth="1" strokeLinecap="round" />
-  </svg>
-)
-
 const courses: Course[] = [
   {
     id: 'passwords',
     number: 'Aihe 1',
-    title: 'Salasanaturvallisuus',
+    title: 'Salasanojen turvallisuus',
     description:
-      'Opi luomaan salasanoja, joita on vaikea murtaa mutta helppo muistaa - ja ymmärrä miksi se on tärkeää.',
+      'Opi luomaan salasanoja, joita on vaikea murtaa mutta helppo muistaa, ja ymmärrä miksi se on tärkeää.',
     duration: 'Noin 10 minuuttia',
     exercises: '3 harjoitusta · 1 tietovisa',
     accentColor: '#1D9E75',
@@ -82,7 +38,7 @@ const courses: Course[] = [
   {
     id: 'phishing',
     number: 'Aihe 2',
-    title: 'Tietojenkalastelu',
+    title: 'Vaaralliset viestit',
     description:
       'Tunnista huijaussähköpostit ja vaaralliset linkit ennen kuin ne aiheuttavat vahinkoa - harjoittele todellisilla esimerkeillä.',
     duration: 'Noin 12 minuuttia',
@@ -98,7 +54,7 @@ const courses: Course[] = [
   {
     id: 'romance-fraud',
     number: 'Aihe 3',
-    title: 'Romanssihuijaukset',
+    title: 'Liian hyvää ollakseen totta',
     description:
       'Opi tunnistamaan verkossa tapahtuvaa tunnemanipulaatiota ja tunnistamaan, jos jokin tuntuu liian hyvältä ollakseen totta.',
     duration: 'Noin 15 minuuttia',
@@ -109,7 +65,7 @@ const courses: Course[] = [
     badgeBg: '#FBEAF0',
     badgeColor: '#72243E',
     route: '/course/romance-fraud',
-    icon: <HeartIcon color="#993556" />,
+    icon: <MaskIcon color="#993556" />,
   },
 ]
 
