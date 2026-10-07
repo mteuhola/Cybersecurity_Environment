@@ -3,9 +3,14 @@ import * as common from "@zxcvbn-ts/language-common";
 import * as english from "@zxcvbn-ts/language-en";
 import finnishPasswordText from "../../../common_finnish_passwords.txt?raw";
 
-const finnishPasswords = [...new Set(
-  finnishPasswordText.split(/\r?\n/).map((word) => word.trim().toLowerCase()).filter(Boolean),
-)];
+const finnishPasswords = [
+  ...new Set(
+    finnishPasswordText
+      .split(/\r?\n/)
+      .map((word) => word.trim().toLowerCase())
+      .filter(Boolean),
+  ),
+];
 
 // A small supplement, not a comprehensive Finnish dictionary. See the activity notes.
 const estimator = new ZxcvbnFactory({

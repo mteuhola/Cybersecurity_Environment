@@ -2,7 +2,9 @@ import { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { assessPassword, MAX_PASSWORD_LENGTH } from "./passwordStrength";
 import styles from "./PasswordCourse.module.css";
-import TextSizeControl, { type TextSizeProps } from "../../components/TextSizeControl";
+import TextSizeControl, {
+  type TextSizeProps,
+} from "../../components/TextSizeControl";
 
 const examples = [
   {

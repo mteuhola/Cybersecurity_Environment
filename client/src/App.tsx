@@ -7,6 +7,10 @@ const PasswordCourse = lazy(
   () => import("./pages/PasswordCourse/PasswordCourse"),
 );
 
+const PhishingCourse = lazy(
+  () => import("./pages/PhishingCourse/PhishingCourse"),
+);
+
 function App() {
   const textSizeProps = useTextSize();
   return (
@@ -18,6 +22,14 @@ function App() {
           element={
             <Suspense fallback={<p role="status">Ladataan harjoitusta…</p>}>
               <PasswordCourse {...textSizeProps} />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/course/phishing"
+          element={
+            <Suspense fallback={<p role="status">Ladataan harjoitusta…</p>}>
+              <PhishingCourse {...textSizeProps} />
             </Suspense>
           }
         />

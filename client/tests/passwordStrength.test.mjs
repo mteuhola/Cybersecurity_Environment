@@ -8,23 +8,33 @@ registerHooks({
   load(url, context, nextLoad) {
     if (url.endsWith(".txt?raw")) {
       const text = readFileSync(new URL(url), "utf8");
-      return { format: "module", source: `export default ${JSON.stringify(text)}`, shortCircuit: true };
+      return {
+        format: "module",
+        source: `export default ${JSON.stringify(text)}`,
+        shortCircuit: true,
+      };
     }
     return nextLoad(url, context);
   },
 });
 
-const {
-  assessPassword,
-  MAX_PASSWORD_LENGTH,
-} = await import("../src/pages/PasswordCourse/passwordStrength.ts");
+const { assessPassword, MAX_PASSWORD_LENGTH } =
+  await import("../src/pages/PasswordCourse/passwordStrength.ts");
 
 test("Finnish passwords from the text file receive weak ratings", () => {
-  const passwords = readFileSync(new URL("../common_finnish_passwords.txt", import.meta.url), "utf8")
-    .split(/\r?\n/).map((word) => word.trim()).filter(Boolean);
+  const passwords = readFileSync(
+    new URL("../common_finnish_passwords.txt", import.meta.url),
+    "utf8",
+  )
+    .split(/\r?\n/)
+    .map((word) => word.trim())
+    .filter(Boolean);
   assert.ok(passwords.length > 0);
   for (const password of passwords) {
-    assert.ok(assessPassword(password).score <= 2, `Expected weak rating for fixture: ${password}`);
+    assert.ok(
+      assessPassword(password).score <= 2,
+      `Expected weak rating for fixture: ${password}`,
+    );
   }
 });
 

@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./CourseSelection.module.css";
-import TextSizeControl, { type TextSizeProps } from "../../components/TextSizeControl";
+import TextSizeControl, {
+  type TextSizeProps,
+} from "../../components/TextSizeControl";
 import {
   LockIcon,
   EmailIcon,
@@ -101,10 +103,9 @@ export default function CourseSelection(textSizeProps: TextSizeProps) {
       </nav>
 
       <div className={styles.hero}>
-        <div className={styles.eyebrow}>Oppimisympäristö</div>
-        <h1 className={styles.title}>Mitä haluat oppia tänään?</h1>
+        <h1 className={styles.title}>Kurssivaihtoehdot</h1>
         <p className={styles.subtitle}>
-          Jokainen aihe on lyhyt itsenäinen kokonaisuus, joissa voit edetä omaan
+          Jokainen aihe on lyhyt itsenäinen kokonaisuus, jossa voit edetä omaan
           tahtiisi.
         </p>
       </div>
