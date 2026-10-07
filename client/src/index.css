@@ -1,0 +1,14 @@
+[data-course="passwords"] {
+  --course-accent: #1d9e75;
+  --course-ink: #0f6e56;
+}
+
+[data-course="phishing"] {
+  --course-accent: #185fa5;
+  --course-ink: #185fa5;
+}
+
+[data-course="romance-fraud"] {
+  --course-accent: #993556;
+  --course-ink: #993556;
+}

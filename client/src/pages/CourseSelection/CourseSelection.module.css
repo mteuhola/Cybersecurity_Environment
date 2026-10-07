@@ -1,6 +1,6 @@
 .root {
-  font-family: 'DM Sans', sans-serif;
-  background: #F7F5F0;
+  font-family: "DM Sans", sans-serif;
+  background: #f7f5f0;
   min-height: 100vh;
   color: #1a1a18;
 }
@@ -12,7 +12,7 @@
   justify-content: space-between;
   padding: 20px 48px;
   border-bottom: 0.5px solid #d6d3ca;
-  background: #F7F5F0;
+  background: #f7f5f0;
 }
 
 .logo {
@@ -33,7 +33,7 @@
 }
 
 .logoText {
-  font-family: 'DM Serif Display', serif;
+  font-family: "DM Serif Display", serif;
   font-size: 18px;
   color: #1a1a18;
   letter-spacing: -0.3px;
@@ -60,7 +60,7 @@
 }
 
 .title {
-  font-family: 'DM Serif Display', serif;
+  font-family: "DM Serif Display", serif;
   font-size: 42px;
   line-height: 1.15;
   color: #1a1a18;
@@ -71,7 +71,7 @@
 
 .subtitle {
   font-size: 17px;
-  color: #5F5E5A;
+  color: #5f5e5a;
   line-height: 1.6;
   max-width: 560px;
   margin: 0;
@@ -94,7 +94,9 @@
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  transition: border-color 0.2s, transform 0.15s;
+  transition:
+    border-color 0.2s,
+    transform 0.15s;
   position: relative;
   overflow: hidden;
   text-align: left;
@@ -102,12 +104,12 @@
 }
 
 .card:hover {
-  border-color: #888780;
+  border-color: var(--course-ink);
   transform: translateY(-2px);
 }
 
 .card:focus-visible {
-  outline: 2px solid #1D9E75;
+  outline: 3px solid var(--course-ink);
   outline-offset: 2px;
 }
 
@@ -140,18 +142,18 @@
 }
 
 .cardTitle {
-  font-family: 'DM Serif Display', serif;
+  font-family: "DM Serif Display", serif;
   font-size: 22px;
   line-height: 1.2;
   margin: 0 0 10px;
-  color: #1a1a18;
+  color: var(--course-ink);
   letter-spacing: -0.3px;
   font-weight: 400;
 }
 
 .cardDesc {
   font-size: 14px;
-  color: #5F5E5A;
+  color: #5f5e5a;
   line-height: 1.65;
   margin: 0 0 20px;
   flex: 1;

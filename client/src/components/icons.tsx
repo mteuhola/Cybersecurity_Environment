@@ -1,18 +1,49 @@
 export const LockIcon = ({ color }: { color: string }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <rect x="5" y="11" width="14" height="10" rx="2" stroke={color} strokeWidth="1.5" />
-    <path d="M8 11V7a4 4 0 018 0v4" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+    <rect
+      x="5"
+      y="11"
+      width="14"
+      height="10"
+      rx="2"
+      stroke={color}
+      strokeWidth="1.5"
+    />
+    <path
+      d="M8 11V7a4 4 0 018 0v4"
+      stroke={color}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
     <circle cx="12" cy="16" r="1.5" fill={color} />
   </svg>
-)
+);
 
 export const EmailIcon = ({ color }: { color: string }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <rect x="3" y="6" width="18" height="13" rx="2" stroke={color} strokeWidth="1.5" />
-    <path d="M3 9l9 6 9-6" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
-    <path d="M15 14l3-3M15 11l3 3" stroke="#E24B4A" strokeWidth="1.5" strokeLinecap="round" />
+    <rect
+      x="3"
+      y="6"
+      width="18"
+      height="13"
+      rx="2"
+      stroke={color}
+      strokeWidth="1.5"
+    />
+    <path
+      d="M3 9l9 6 9-6"
+      stroke={color}
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
+    <path
+      d="M15 14l3-3M15 11l3 3"
+      stroke="#E24B4A"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
   </svg>
-)
+);
 
 export const MaskIcon = ({ color }: { color: string }) => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -67,17 +98,28 @@ export const MaskIcon = ({ color }: { color: string }) => (
       fill="none"
     />
   </svg>
-)
+);
 
 export const ArrowIcon = () => (
   <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-    <path d="M2 6h8M7 3l3 3-3 3" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    <path
+      d="M2 6h8M7 3l3 3-3 3"
+      stroke="#fff"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
-)
+);
 
-export const ClockIcon = ({ color = '#888780' }: { color?: string }) => (
+export const ClockIcon = ({ color = "#888780" }: { color?: string }) => (
   <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
     <circle cx="6" cy="6" r="5" stroke={color} />
-    <path d="M6 3.5V6l2 1.5" stroke={color} strokeWidth="1" strokeLinecap="round" />
+    <path
+      d="M6 3.5V6l2 1.5"
+      stroke={color}
+      strokeWidth="1"
+      strokeLinecap="round"
+    />
   </svg>
-)
+);
