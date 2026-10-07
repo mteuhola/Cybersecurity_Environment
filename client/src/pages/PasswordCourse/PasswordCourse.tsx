@@ -2,6 +2,7 @@ import { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { assessPassword, MAX_PASSWORD_LENGTH } from "./passwordStrength";
 import styles from "./PasswordCourse.module.css";
+import TextSizeControl, { type TextSizeProps } from "../../components/TextSizeControl";
 
 const examples = [
   {
@@ -24,7 +25,7 @@ const examples = [
   },
 ];
 
-export default function PasswordCourse() {
+export default function PasswordCourse(textSizeProps: TextSizeProps) {
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
   const [visited, setVisited] = useState<number[]>([]);
@@ -48,7 +49,10 @@ export default function PasswordCourse() {
         <Link to="/" className={styles.brand}>
           Turvassa Verkossa
         </Link>
-        <Link to="/">← Takaisin aiheisiin</Link>
+        <div className="nav-actions">
+          <Link to="/">← Takaisin aiheisiin</Link>
+          <TextSizeControl {...textSizeProps} />
+        </div>
       </nav>
       <main className={styles.main}>
         <header>

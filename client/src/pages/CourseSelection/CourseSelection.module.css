@@ -1,4 +1,5 @@
 .root {
+  overflow-wrap: anywhere;
   font-family: "DM Sans", sans-serif;
   background: #f7f5f0;
   min-height: 100vh;
@@ -8,6 +9,8 @@
 /* Nav */
 .nav {
   display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
   align-items: center;
   justify-content: space-between;
   padding: 20px 48px;
@@ -34,13 +37,13 @@
 
 .logoText {
   font-family: "DM Serif Display", serif;
-  font-size: 18px;
+  font-size: 2rem;
   color: #1a1a18;
   letter-spacing: -0.3px;
 }
 
 .navHint {
-  font-size: 13px;
+  font-size: 0.8125rem;
   color: #888780;
 }
 
@@ -51,7 +54,7 @@
 }
 
 .eyebrow {
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -61,7 +64,7 @@
 
 .title {
   font-family: "DM Serif Display", serif;
-  font-size: 42px;
+  font-size: 2.625rem;
   line-height: 1.15;
   color: #1a1a18;
   margin: 0 0 14px;
@@ -70,7 +73,7 @@
 }
 
 .subtitle {
-  font-size: 17px;
+  font-size: 1.0625rem;
   color: #5f5e5a;
   line-height: 1.6;
   max-width: 560px;
@@ -80,7 +83,7 @@
 /* Grid */
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
   gap: 20px;
   padding: 0 48px 48px;
 }
@@ -134,7 +137,7 @@
 }
 
 .cardNumber {
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -143,7 +146,7 @@
 
 .cardTitle {
   font-family: "DM Serif Display", serif;
-  font-size: 22px;
+  font-size: 1.375rem;
   line-height: 1.2;
   margin: 0 0 10px;
   color: var(--course-ink);
@@ -152,7 +155,7 @@
 }
 
 .cardDesc {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #5f5e5a;
   line-height: 1.65;
   margin: 0 0 20px;
@@ -163,7 +166,7 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  font-size: 11px;
+  font-size: 0.6875rem;
   font-weight: 500;
   padding: 4px 10px;
   border-radius: 20px;
@@ -173,6 +176,8 @@
 
 .cardMeta {
   display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
   align-items: center;
   justify-content: space-between;
   margin-top: auto;
@@ -182,7 +187,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 12px;
+  font-size: 0.75rem;
   color: #888780;
 }
 
@@ -190,7 +195,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 500;
   color: #fff;
   padding: 8px 14px;
@@ -220,6 +225,32 @@
 }
 
 .footerText {
-  font-size: 13px;
+  font-size: 0.8125rem;
   color: #888780;
+}
+
+@media (max-width: 800px) {
+  .nav {
+    padding: 20px 16px;
+  }
+
+  .hero {
+    padding: 32px 16px;
+  }
+
+  .grid {
+    padding: 0 16px 32px;
+  }
+
+  .card {
+    padding: 24px 20px;
+  }
+
+  .divider {
+    margin-inline: 16px;
+  }
+
+  .footer {
+    padding-inline: 16px;
+  }
 }

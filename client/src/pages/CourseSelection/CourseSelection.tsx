@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./CourseSelection.module.css";
+import TextSizeControl, { type TextSizeProps } from "../../components/TextSizeControl";
 import {
   LockIcon,
   EmailIcon,
@@ -75,7 +76,7 @@ const courses: Course[] = [
   },
 ];
 
-export default function CourseSelection() {
+export default function CourseSelection(textSizeProps: TextSizeProps) {
   const navigate = useNavigate();
 
   return (
@@ -94,7 +95,9 @@ export default function CourseSelection() {
           </div>
           <span className={styles.logoText}>Turvassa Verkossa</span>
         </div>
-        <span className={styles.navHint}>Valitse aihe aloittaaksesi</span>
+        <div className="nav-actions">
+          <TextSizeControl {...textSizeProps} />
+        </div>
       </nav>
 
       <div className={styles.hero}>

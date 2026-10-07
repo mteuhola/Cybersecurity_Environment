@@ -1,3 +1,74 @@
+body {
+  margin: 0;
+  font-family: "DM Sans", sans-serif;
+  background: #f7f5f0;
+  color: #1a1a18;
+}
+
+.nav-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-left: auto;
+  min-width: 0;
+  max-width: 100%;
+}
+
+nav button.text-size-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  min-height: 48px;
+  max-width: 100%;
+  padding: 8px 16px 8px 10px;
+  border: 1px solid #d6d3ca;
+  border-radius: 16px;
+  background: #fff;
+  color: #5f5e5a;
+  font-family: "DM Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  cursor: pointer;
+}
+
+.text-size-control__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.25em;
+  height: 2.25em;
+  border-radius: 10px;
+  background: #f7f5f0;
+  color: var(--course-ink, #1a1a18);
+  font-family: "DM Serif Display", serif;
+  font-size: 1.125rem;
+}
+
+.text-size-control__text {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.text-size-control__value {
+  color: var(--course-ink, #1a1a18);
+  font-weight: 500;
+}
+
+nav button.text-size-control:hover {
+  border-color: var(--course-ink, #888780);
+  background: #f7f5f0;
+}
+
+nav button.text-size-control:focus-visible {
+  outline: 3px solid var(--course-ink, #1a1a18);
+  outline-offset: 3px;
+}
 [data-course="passwords"] {
   --course-accent: #1d9e75;
   --course-ink: #0f6e56;
