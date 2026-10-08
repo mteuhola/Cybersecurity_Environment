@@ -70,16 +70,22 @@ nav button.text-size-control:focus-visible {
   outline-offset: 3px;
 }
 [data-course="passwords"] {
+  --course-tint: #e1f5ee;
+  --course-notice-ink: #085041;
   --course-accent: #1d9e75;
   --course-ink: #0f6e56;
 }
 
 [data-course="phishing"] {
+  --course-tint: #e6f1fb;
+  --course-notice-ink: #0c447c;
   --course-accent: #185fa5;
   --course-ink: #185fa5;
 }
 
 [data-course="romance-fraud"] {
+  --course-tint: #fbeaf0;
+  --course-notice-ink: #72243e;
   --course-accent: #993556;
   --course-ink: #993556;
 }

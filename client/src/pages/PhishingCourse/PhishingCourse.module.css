@@ -291,11 +291,6 @@
 .findings p {
   margin-top: 4px;
 }
-.completion {
-  margin-top: 24px;
-  padding-top: 8px;
-  border-top: 3px solid var(--course-accent);
-}
 .small {
   font-size: 1rem;
   color: #53524d;

@@ -1,3 +1,4 @@
+import CompletionNotice from "../../components/CompletionNotice";
 import CompletionBadge from "../../components/CompletionBadge";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
 import { useRef, useState } from "react";
@@ -252,11 +253,7 @@ export default function PhishingCourse({
               </section>
             )}
             {complete && (
-              <section
-                className={styles.completion}
-                aria-labelledby="complete-title"
-              >
-                <CompletionBadge />
+              <CompletionNotice labelledBy="complete-title">
                 <h3 id="complete-title">Kaikki merkit löytyivät!</h3>
                 <p>
                   Hienoa työtä! Harjoittelit viestin tarkistamista. Oikeassa
@@ -270,7 +267,7 @@ export default function PhishingCourse({
                   tutusta puhelinnumerosta. Ilmoita viesti roskapostiksi tai
                   tietojenkalasteluksi.
                 </p>
-              </section>
+              </CompletionNotice>
             )}
             <p className={styles.small}>
               Kun löydät kaikki varoitusmerkit, ansaitset suoritusmerkin. Merkki

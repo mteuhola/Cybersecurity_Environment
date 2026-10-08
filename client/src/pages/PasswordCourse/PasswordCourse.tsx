@@ -1,3 +1,4 @@
+import CompletionNotice from "../../components/CompletionNotice";
 import CompletionBadge from "../../components/CompletionBadge";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
 import { useMemo, useRef, useState } from "react";
@@ -208,12 +209,12 @@ export default function PasswordCourse({
                 </strong>
               </p>
               {visited.length === examples.length && (
-                <p className={styles.notice}>
-                  <CompletionBadge />
-                  <br />
-                  Hienoa, tutkit kaikki esimerkit! Kokeile seuraavaksi omaa
-                  keksittyä salasanaa ja muuta sitä. Mitä huomaat?
-                </p>
+                <CompletionNotice>
+                  <p>
+                    Hienoa, tutkit kaikki esimerkit! Kokeile seuraavaksi omaa
+                    keksittyä salasanaa ja muuta sitä. Mitä huomaat?
+                  </p>
+                </CompletionNotice>
               )}
             </div>
             <p className={styles.small}>
