@@ -1,3 +1,8 @@
+import {
+  canSavePracticePassword,
+  readPracticePassword,
+  savePracticePassword,
+} from "../../progress/practicePassword";
 import CompletionNotice from "../../components/CompletionNotice";
 import CompletionBadge from "../../components/CompletionBadge";
 import type { ActivityProgressProps } from "../../progress/courseProgress";
@@ -39,17 +44,52 @@ export default function PasswordCourse({
   const [visible, setVisible] = useState(false);
   const [visited, setVisited] = useState<number[]>([]);
   const [example, setExample] = useState<number | null>(null);
+  const [hasTyped, setHasTyped] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [hasSaved, setHasSaved] = useState(
+    () => readPracticePassword() !== null,
+  );
+  const [saveError, setSaveError] = useState("");
   const input = useRef<HTMLInputElement>(null);
   const assessment = useMemo(() => assessPassword(password), [password]);
   const tooLong = password.length > MAX_PASSWORD_LENGTH;
 
+  const examplesInspected = visited.length === examples.length;
+  const canSave = canSavePracticePassword({
+    examplesInspected,
+    hasTyped,
+    isExample: examples.some((item) => item.value === password),
+    score: assessment?.score,
+  });
+
+  async function savePassword() {
+    if (!canSave || isSaving) return;
+    setIsSaving(true);
+    setSaveError("");
+    try {
+      await savePracticePassword(password);
+      setHasSaved(true);
+      setPassword("");
+      setVisible(false);
+      setHasTyped(false);
+      onComplete();
+    } catch {
+      setSaveError(
+        "Tallennus ei onnistunut. Tarkista, että selaimen tallennus on sallittu ja käytössä on suojattu yhteys. Voit yrittää uudelleen. Merkkiä ei myönnetty tästä yrityksestä.",
+      );
+    } finally {
+      setIsSaving(false);
+    }
+  }
+
   function selectExample(index: number) {
+    setHasTyped(false);
+    setSaveError("");
     setPassword(examples[index].value);
     setExample(index);
     setVisible(true);
     const nextVisited = visited.includes(index) ? visited : [...visited, index];
     setVisited(nextVisited);
-    if (nextVisited.length === examples.length) onComplete();
   }
 
   return (
@@ -83,7 +123,9 @@ export default function PasswordCourse({
             <p id="privacy" className={styles.notice}>
               <strong>Käytä vain keksittyjä harjoitussalasanoja.</strong> Älä
               kirjoita tähän oikeaa salasanaasi. Harjoitus arvioi tekstin omassa
-              selaimessasi eikä lähetä tai tallenna sitä.
+              selaimessasi eikä lähetä sitä palvelimelle. Kun valitset Tallenna,
+              tähän selaimeen tallennetaan tarkistustieto kurssin viimeistä
+              kysymystä varten, ei salasanaa luettavassa muodossa.
             </p>
             <label className={styles.label} htmlFor="practice-password">
               Harjoitussalasana
@@ -93,6 +135,7 @@ export default function PasswordCourse({
               id="practice-password"
               type={visible ? "text" : "password"}
               value={password}
+              disabled={isSaving}
               autoComplete="off"
               autoCapitalize="off"
               autoCorrect="off"
@@ -101,12 +144,15 @@ export default function PasswordCourse({
               aria-invalid={tooLong}
               onChange={(event) => {
                 setPassword(event.target.value);
+                setHasTyped(true);
+                setSaveError("");
                 setExample(null);
               }}
             />
             <div className={styles.controls}>
               <button
                 type="button"
+                disabled={isSaving}
                 aria-pressed={visible}
                 onClick={() => setVisible(!visible)}
               >
@@ -114,8 +160,11 @@ export default function PasswordCourse({
               </button>
               <button
                 type="button"
+                disabled={isSaving}
                 onClick={() => {
                   setPassword("");
+                  setHasTyped(false);
+                  setSaveError("");
                   setExample(null);
                   setVisible(false);
                   input.current?.focus();
@@ -167,6 +216,50 @@ export default function PasswordCourse({
                 </p>
               )}
             </div>
+            {examplesInspected && (
+              <section
+                className={styles.notice}
+                aria-labelledby="create-password-title"
+              >
+                <h3 id="create-password-title">
+                  Seuraava tehtävä: luo vahva salasana
+                </h3>
+                <p>
+                  Kirjoita yllä olevaan kenttään oma keksitty harjoitussalasana,
+                  jonka arvio on 4/4. Valitse sitten Tallenna ansaitaksesi
+                  merkin. Älä käytä esimerkkisalasanaa.
+                </p>
+                <p>
+                  Muista luomasi salasana: syötät sen uudelleen kurssin
+                  viimeisessä kysymyksessä. Tallennus toimii tässä selaimessa.
+                  Uusi tallennus korvaa aiemman harjoitussalasanan.
+                </p>
+                <button
+                  type="button"
+                  disabled={!canSave || isSaving}
+                  onClick={savePassword}
+                  aria-describedby="save-requirements"
+                >
+                  {isSaving ? "Tallennetaan…" : "Tallenna"}
+                </button>
+                <p id="save-requirements">
+                  Tallennus avautuu, kun oma kirjoittamasi salasana saa arvion
+                  4/4.
+                </p>
+              </section>
+            )}
+            <div role="status" aria-live="polite">
+              {saveError && <p>{saveError}</p>}
+              {hasSaved && (
+                <CompletionNotice>
+                  <p>
+                    Harjoitussalasanasi on tallennettu tarkistusta varten ja
+                    olet ansainnut merkin! Käytä samaa salasanaa kurssin
+                    viimeisessä kysymyksessä.
+                  </p>
+                </CompletionNotice>
+              )}
+            </div>
             <p className={styles.small}>
               Arvio ei takaa turvallisuutta. Mittari ei tunnista kaikkia
               suomalaisia sanoja, henkilötietoja tai vuotaneita salasanoja. Se
@@ -184,6 +277,7 @@ export default function PasswordCourse({
                 <button
                   type="button"
                   key={item.name}
+                  disabled={isSaving}
                   aria-pressed={example === index}
                   onClick={() => selectExample(index)}
                 >
@@ -208,19 +302,34 @@ export default function PasswordCourse({
                   Esimerkkejä tutkittu: {visited.length}/{examples.length}
                 </strong>
               </p>
-              {visited.length === examples.length && (
-                <CompletionNotice>
+              {examplesInspected && (
+                <div className={styles.notice}>
                   <p>
-                    Hienoa, tutkit kaikki esimerkit! Kokeile seuraavaksi omaa
-                    keksittyä salasanaa ja muuta sitä. Mitä huomaat?
+                    Hienoa, tutkit kaikki esimerkit! Luo nyt oma
+                    harjoitussalasana, jonka arvio on 4/4, ja tallenna se
+                    ansaitaksesi merkin.
                   </p>
-                </CompletionNotice>
+                  <button
+                    type="button"
+                    disabled={isSaving}
+                    onClick={() => {
+                      setPassword("");
+                      setExample(null);
+                      setHasTyped(false);
+                      setVisible(false);
+                      setSaveError("");
+                      input.current?.focus();
+                    }}
+                  >
+                    Luo oma salasana
+                  </button>
+                </div>
               )}
             </div>
             <p className={styles.small}>
-              Kun olet tutkinut kaikki esimerkit, ansaitset suoritusmerkin.
-              Merkki tallennetaan tähän selaimeen, jos tallennus on sallittu.
-              Harjoittelun voit aloittaa uudelleen ilman merkin menetystä.
+              Ansaitset merkin tutkimalla kaikki esimerkit ja tallentamalla oman
+              4/4-harjoitussalasanan. Esimerkkien tutkiminen yksin ei vielä
+              riitä.
             </p>
           </aside>
         </div>

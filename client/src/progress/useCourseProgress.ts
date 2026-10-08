@@ -1,3 +1,7 @@
+import {
+  readPracticePassword,
+  reconcilePasswordCompletion,
+} from "./practicePassword";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   applyProgress,
@@ -9,7 +13,10 @@ import {
 export function useCourseProgress() {
   const [completed, setCompleted] = useState<string[]>(() => {
     try {
-      return parseProgress(localStorage.getItem(progressStorageKey));
+      return reconcilePasswordCompletion(
+        parseProgress(localStorage.getItem(progressStorageKey)),
+        readPracticePassword() !== null,
+      );
     } catch {
       return [];
     }
