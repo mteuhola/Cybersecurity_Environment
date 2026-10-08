@@ -1,3 +1,5 @@
+import CompletionBadge from "../../components/CompletionBadge";
+import type { ActivityProgressProps } from "../../progress/courseProgress";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import TextSizeControl, {
@@ -6,7 +8,11 @@ import TextSizeControl, {
 import { clues, emailParts } from "./phishingEmail";
 import styles from "./PhishingCourse.module.css";
 
-export default function PhishingCourse(textSizeProps: TextSizeProps) {
+export default function PhishingCourse({
+  isComplete,
+  onComplete,
+  ...textSizeProps
+}: TextSizeProps & ActivityProgressProps) {
   const [found, setFound] = useState<string[]>([]);
   const [feedback, setFeedback] = useState(
     "Valitse viestistä kohta, jota pidät epäilyttävänä.",
@@ -21,6 +27,7 @@ export default function PhishingCourse(textSizeProps: TextSizeProps) {
       setFeedback(`Löysit tämän jo. ${part.title}: ${part.explanation}`);
     } else {
       const nextCount = found.length + 1;
+      if (nextCount === clues.length) onComplete();
       setFound((previous) =>
         previous.includes(part.id) ? previous : [...previous, part.id],
       );
@@ -119,6 +126,11 @@ export default function PhishingCourse(textSizeProps: TextSizeProps) {
             eivät avaa linkkejä tai liitteitä. Voit kokeilla rauhassa ilman
             aikarajaa.
           </p>
+          <div role="status" aria-live="polite">
+            {isComplete && (
+              <CompletionBadge label="Aihe suoritettu – ansaitsit merkin!" />
+            )}
+          </div>
         </header>
         <div className={styles.layout}>
           <section className={styles.email} aria-labelledby="email-title">
@@ -143,7 +155,15 @@ export default function PhishingCourse(textSizeProps: TextSizeProps) {
             </div>
             <div className={styles.emailBody}>
               {(
-                ["greeting", "request", "attachmentInstructions", "link", "fakeLink", "secrecy", "signature"] as const
+                [
+                  "greeting",
+                  "request",
+                  "attachmentInstructions",
+                  "link",
+                  "fakeLink",
+                  "secrecy",
+                  "signature",
+                ] as const
               ).map((id) => (
                 <p key={id} className={styles.emailParagraph}>
                   {renderEmailPart(id)}
@@ -236,23 +256,26 @@ export default function PhishingCourse(textSizeProps: TextSizeProps) {
                 className={styles.completion}
                 aria-labelledby="complete-title"
               >
+                <CompletionBadge />
                 <h3 id="complete-title">Kaikki merkit löytyivät!</h3>
                 <p>
-                  Hienoa työtä! Harjoittelit viestin
-                  tarkistamista. Oikeassa huijausviestissä voi olla vain yksi
-                  näistä merkeistä tai aivan erilaisia merkkejä.
+                  Hienoa työtä! Harjoittelit viestin tarkistamista. Oikeassa
+                  huijausviestissä voi olla vain yksi näistä merkeistä tai aivan
+                  erilaisia merkkejä.
                 </p>
                 <p>
-                  <strong>Turvallinen lähestymistapa:</strong> Epäillessäsi viestin aitoutta,
-                  älä vastaa, avaa liitettä tai klikkaa viestin linkkiä. Tarkista asia pankin
-                  omasta sovelluksesta tai tutusta puhelinnumerosta. Ilmoita
-                  viesti roskapostiksi tai tietojenkalasteluksi.
+                  <strong>Turvallinen lähestymistapa:</strong> Epäillessäsi
+                  viestin aitoutta, älä vastaa, avaa liitettä tai klikkaa
+                  viestin linkkiä. Tarkista asia pankin omasta sovelluksesta tai
+                  tutusta puhelinnumerosta. Ilmoita viesti roskapostiksi tai
+                  tietojenkalasteluksi.
                 </p>
               </section>
             )}
             <p className={styles.small}>
-              Eteneminen säilyy tämän harjoittelukerran ajan. Voit palata jo
-              löytämääsi kohtaan ja lukea selityksen uudelleen.
+              Kun löydät kaikki varoitusmerkit, ansaitset suoritusmerkin. Merkki
+              tallennetaan tähän selaimeen, jos tallennus on sallittu. Uusi
+              yritys ei poista ansaittua merkkiä.
             </p>
           </aside>
         </div>

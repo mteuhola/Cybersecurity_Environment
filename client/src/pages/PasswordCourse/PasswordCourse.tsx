@@ -1,3 +1,5 @@
+import CompletionBadge from "../../components/CompletionBadge";
+import type { ActivityProgressProps } from "../../progress/courseProgress";
 import { useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { assessPassword, MAX_PASSWORD_LENGTH } from "./passwordStrength";
@@ -27,7 +29,11 @@ const examples = [
   },
 ];
 
-export default function PasswordCourse(textSizeProps: TextSizeProps) {
+export default function PasswordCourse({
+  isComplete,
+  onComplete,
+  ...textSizeProps
+}: TextSizeProps & ActivityProgressProps) {
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
   const [visited, setVisited] = useState<number[]>([]);
@@ -40,9 +46,9 @@ export default function PasswordCourse(textSizeProps: TextSizeProps) {
     setPassword(examples[index].value);
     setExample(index);
     setVisible(true);
-    setVisited((previous) =>
-      previous.includes(index) ? previous : [...previous, index],
-    );
+    const nextVisited = visited.includes(index) ? visited : [...visited, index];
+    setVisited(nextVisited);
+    if (nextVisited.length === examples.length) onComplete();
   }
 
   return (
@@ -64,6 +70,11 @@ export default function PasswordCourse(textSizeProps: TextSizeProps) {
             Millainen salasana on vaikea arvata? Tutki esimerkkejä ja kokeile
             sitten omaa harjoitussalasanaa. Voit edetä rauhassa.
           </p>
+          <div role="status" aria-live="polite">
+            {isComplete && (
+              <CompletionBadge label="Aihe suoritettu – ansaitsit merkin!" />
+            )}
+          </div>
         </header>
         <div className={styles.layout}>
           <section className={styles.card} aria-labelledby="practice-title">
@@ -196,16 +207,19 @@ export default function PasswordCourse(textSizeProps: TextSizeProps) {
                   Esimerkkejä tutkittu: {visited.length}/{examples.length}
                 </strong>
               </p>
-              {visited.length === 3 && (
+              {visited.length === examples.length && (
                 <p className={styles.notice}>
+                  <CompletionBadge />
+                  <br/>
                   Hienoa, tutkit kaikki esimerkit! Kokeile seuraavaksi omaa
                   keksittyä salasanaa ja muuta sitä. Mitä huomaat?
                 </p>
               )}
             </div>
             <p className={styles.small}>
-              Eteneminen säilyy tämän harjoittelukerran ajan. Voit kokeilla niin
-              monta kertaa kuin haluat.
+              Kun olet tutkinut kaikki esimerkit, ansaitset suoritusmerkin.
+              Merkki tallennetaan tähän selaimeen, jos tallennus on sallittu.
+              Harjoittelun voit aloittaa uudelleen ilman merkin menetystä.
             </p>
           </aside>
         </div>

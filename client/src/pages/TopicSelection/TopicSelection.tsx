@@ -1,3 +1,5 @@
+import CompletionBadge from "../../components/CompletionBadge";
+import CourseProgress from "../../components/CourseProgress";
 import { Link } from "react-router-dom";
 import TextSizeControl, {
   type TextSizeProps,
@@ -32,6 +34,7 @@ export default function TopicSelection({
             Valitse aihe aloittaaksesi. Voit edetä omaan tahtiisi ja palata
             tähän näkymään harjoituksesta.
           </p>
+          <CourseProgress course={course} />
         </header>
         <section aria-labelledby="topics-title">
           <h2 id="topics-title">Valitse aihe</h2>
@@ -45,10 +48,12 @@ export default function TopicSelection({
                     </span>
                     <div className={styles.content}>
                       <h3>{topic.title}</h3>
+                      {topic.isComplete && <CompletionBadge />}
                       <p>{topic.description}</p>
                     </div>
                     <span className={styles.start}>
-                      Aloita <span aria-hidden="true">→</span>
+                      {topic.isComplete ? "Kertaa" : "Aloita"}{" "}
+                      <span aria-hidden="true">→</span>
                     </span>
                   </Link>
                 </li>

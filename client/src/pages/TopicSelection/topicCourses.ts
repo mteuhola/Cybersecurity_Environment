@@ -1,5 +1,6 @@
 export interface CourseTopic {
   id: string;
+  isComplete: boolean;
   title: string;
   description: string;
   path: string;
@@ -7,6 +8,7 @@ export interface CourseTopic {
 
 export interface TopicCourse {
   id: string;
+  isComplete: boolean;
   title: string;
   path: string;
   topics: CourseTopic[];
@@ -15,11 +17,13 @@ export interface TopicCourse {
 export const topicCourses: TopicCourse[] = [
   {
     id: "passwords",
+    isComplete: false,
     title: "Salasanojen turvallisuus",
     path: "/course/passwords",
     topics: [
       {
         id: "password-strength",
+        isComplete: false,
         title: "Kokeile salasanan vahvuutta",
         description:
           "Tutki esimerkkisalasanoja ja kokeile omaa keksittyä salasanaa. Opi, mikä tekee salasanasta vaikeasti arvattavan.",
@@ -29,11 +33,13 @@ export const topicCourses: TopicCourse[] = [
   },
   {
     id: "phishing",
+    isComplete: false,
     title: "Vaaralliset viestit",
     path: "/course/phishing",
     topics: [
       {
         id: "suspicious-email",
+        isComplete: false,
         title: "Tunnista huijausviestin merkit",
         description:
           "Tutki kuvitteellista sähköpostia ja etsi sen epäilyttävät kohdat. Saat jokaisesta havainnosta selityksen ja tarvittaessa vihjeen.",
@@ -43,6 +49,7 @@ export const topicCourses: TopicCourse[] = [
   },
   {
     id: "romance-fraud",
+    isComplete: false,
     title: "Liian hyvää ollakseen totta",
     path: "/course/romance-fraud",
     topics: [],

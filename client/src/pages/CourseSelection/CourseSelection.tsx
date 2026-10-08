@@ -1,3 +1,5 @@
+import CourseProgress from "../../components/CourseProgress";
+import type { TopicCourse } from "../TopicSelection/topicCourses";
 import { useNavigate } from "react-router-dom";
 import styles from "./CourseSelection.module.css";
 import TextSizeControl, {
@@ -78,7 +80,10 @@ const courses: Course[] = [
   },
 ];
 
-export default function CourseSelection(textSizeProps: TextSizeProps) {
+export default function CourseSelection({
+  progressCourses,
+  ...textSizeProps
+}: TextSizeProps & { progressCourses: TopicCourse[] }) {
   const navigate = useNavigate();
 
   return (
@@ -111,59 +116,65 @@ export default function CourseSelection(textSizeProps: TextSizeProps) {
       </div>
 
       <div className={styles.grid}>
-        {courses.map((course) => (
-          <button
-            key={course.id}
-            className={styles.card}
-            data-course={course.id}
-            onClick={() => navigate(course.route)}
-            aria-label={`Aloita kurssi: ${course.title}`}
-          >
-            <div
-              className={styles.cardAccent}
-              style={{ background: course.accentColor }}
-            />
-
-            <div
-              className={styles.cardIcon}
-              style={{ background: course.iconBg }}
+        {courses.map((course) => {
+          const progress = progressCourses.find(
+            (item) => item.id === course.id,
+          )!;
+          return (
+            <button
+              key={course.id}
+              className={styles.card}
+              data-course={course.id}
+              onClick={() => navigate(course.route)}
+              aria-label={`${course.title}: ${progress.topics.filter((topic) => topic.isComplete).length}/${progress.topics.length} aihetta suoritettu. ${progress.isComplete ? "Kurssi suoritettu. Kertaa kurssia." : "Avaa kurssin aiheet."}`}
             >
-              {course.icon}
-            </div>
-
-            <div
-              className={styles.cardNumber}
-              style={{ color: course.numberColor }}
-            >
-              {course.number}
-            </div>
-
-            <h2 className={styles.cardTitle}>{course.title}</h2>
-            <p className={styles.cardDesc}>{course.description}</p>
-
-            <div
-              className={styles.badge}
-              style={{ background: course.badgeBg, color: course.badgeColor }}
-            >
-              <ClockIcon color={course.badgeColor} />
-              {course.duration}
-            </div>
-
-            <div className={styles.cardMeta}>
-              <div className={styles.cardDuration}>
-                <ClockIcon />
-                {course.exercises}
-              </div>
               <div
-                className={styles.cardBtn}
+                className={styles.cardAccent}
                 style={{ background: course.accentColor }}
+              />
+
+              <div
+                className={styles.cardIcon}
+                style={{ background: course.iconBg }}
               >
-                Aloita
-                <ArrowIcon />
+                {course.icon}
               </div>
-            </div>
-          </button>
-        ))}
+
+              <div
+                className={styles.cardNumber}
+                style={{ color: course.numberColor }}
+              >
+                {course.number}
+              </div>
+
+              <h2 className={styles.cardTitle}>{course.title}</h2>
+              <p className={styles.cardDesc}>{course.description}</p>
+
+              <div
+                className={styles.badge}
+                style={{ background: course.badgeBg, color: course.badgeColor }}
+              >
+                <ClockIcon color={course.badgeColor} />
+                {course.duration}
+              </div>
+
+              <CourseProgress course={progress} />
+              <div className={styles.cardMeta}>
+                <div className={styles.cardDuration}>
+                  <ClockIcon />
+                  {progress.topics.length} aihetta
+                </div>
+                <div
+                  className={styles.cardBtn}
+                  style={{ background: course.accentColor }}
+                >
+                  {progress.isComplete ? "Kertaa" : "Aloita"}
+                  <ArrowIcon />
+                </div>
+              </div>
+            </button>
+          );
+        })}
       </div>
 
       <div className={styles.divider} />

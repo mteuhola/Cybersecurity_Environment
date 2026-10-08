@@ -3,7 +3,7 @@ import { lazy, Suspense } from "react";
 import CourseSelection from "./pages/CourseSelection/CourseSelection";
 import { useTextSize } from "./useTextSize";
 import TopicSelection from "./pages/TopicSelection/TopicSelection";
-import { topicCourses } from "./pages/TopicSelection/topicCourses";
+import { useCourseProgress } from "./progress/useCourseProgress";
 
 const PasswordCourse = lazy(
   () => import("./pages/PasswordCourse/PasswordCourse"),
@@ -15,15 +15,31 @@ const PhishingCourse = lazy(
 
 function App() {
   const textSizeProps = useTextSize();
+  const { courses, markComplete } = useCourseProgress();
+  const isComplete = (path: string) =>
+    courses.some((course) =>
+      course.topics.some((topic) => topic.path === path && topic.isComplete),
+    );
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<CourseSelection {...textSizeProps} />} />
+        <Route
+          path="/"
+          element={
+            <CourseSelection {...textSizeProps} progressCourses={courses} />
+          }
+        />
         <Route
           path="/course/passwords/password-strength"
           element={
             <Suspense fallback={<p role="status">Ladataan harjoitusta…</p>}>
-              <PasswordCourse {...textSizeProps} />
+              <PasswordCourse
+                {...textSizeProps}
+                isComplete={isComplete("/course/passwords/password-strength")}
+                onComplete={() =>
+                  markComplete("/course/passwords/password-strength")
+                }
+              />
             </Suspense>
           }
         />
@@ -31,11 +47,17 @@ function App() {
           path="/course/phishing/suspicious-email"
           element={
             <Suspense fallback={<p role="status">Ladataan harjoitusta…</p>}>
-              <PhishingCourse {...textSizeProps} />
+              <PhishingCourse
+                {...textSizeProps}
+                isComplete={isComplete("/course/phishing/suspicious-email")}
+                onComplete={() =>
+                  markComplete("/course/phishing/suspicious-email")
+                }
+              />
             </Suspense>
           }
         />
-        {topicCourses.map((course) => (
+        {courses.map((course) => (
           <Route
             key={course.id}
             path={course.path}
