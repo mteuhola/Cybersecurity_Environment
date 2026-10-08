@@ -65,7 +65,8 @@ export const emailParts = [
     text: "Vaihtoehtoisesti voit kirjautua sisään tästä: https://tonttupankki.example/kirjaudu",
     href: "https://omituinenosoite.fi/huijaus",
     suspicious: true,
-    title: "Näennäisesti oikeaan osoitteeseen vievä linkki, mutta ohjaa kuitenkin väärään kohteeseen",
+    title:
+      "Näennäisesti oikeaan osoitteeseen vievä linkki, mutta ohjaa kuitenkin väärään kohteeseen",
     explanation:
       "Itse linkki näyttää vievän oikeaan osoitteeseen, mutta liikuttaessa hiiren osoittimella linkin päälle selaimen alareunassa näkyy väärä osoite. Tarkista linkin kohde ennen kuin klikkaat sitä.",
     hint: "Vertaa jälkimmäisen linkin kohdetta selaimen alareunassa näkyvään osoitteeseen.",

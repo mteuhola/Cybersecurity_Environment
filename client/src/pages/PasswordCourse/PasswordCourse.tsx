@@ -210,7 +210,7 @@ export default function PasswordCourse({
               {visited.length === examples.length && (
                 <p className={styles.notice}>
                   <CompletionBadge />
-                  <br/>
+                  <br />
                   Hienoa, tutkit kaikki esimerkit! Kokeile seuraavaksi omaa
                   keksittyä salasanaa ja muuta sitä. Mitä huomaat?
                 </p>
