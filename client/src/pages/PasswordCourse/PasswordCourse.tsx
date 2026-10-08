@@ -52,7 +52,7 @@ export default function PasswordCourse(textSizeProps: TextSizeProps) {
           Turvassa Verkossa
         </Link>
         <div className="nav-actions">
-          <Link to="/">← Takaisin aiheisiin</Link>
+          <Link to="/course/passwords">← Takaisin aiheisiin</Link>
           <TextSizeControl {...textSizeProps} />
         </div>
       </nav>
@@ -217,7 +217,6 @@ export default function PasswordCourse(textSizeProps: TextSizeProps) {
             tunnistautuminen käyttöön: silloin kirjautuminen vahvistetaan
             salasanan lisäksi esimerkiksi puhelimella.
           </p>
-          <Link to="/">Takaisin aiheisiin →</Link>
         </section>
       </main>
     </div>

@@ -40,7 +40,7 @@ export function assessPassword(password: string) {
   const tips: string[] = [];
   if (Array.from(password).length < 15)
     tips.push(
-      "Pidennä salasanaa. Tavoittele vähintään 15 merkkiä, esimerkiksi useita toisiinsa liittymättömiä sanoja.",
+      "Pidennä salasanaa. Tavoittele vähintään 12 merkkiä, esimerkiksi useita toisiinsa liittymättömiä sanoja.",
     );
   if (patterns.has("repeat"))
     tips.push(

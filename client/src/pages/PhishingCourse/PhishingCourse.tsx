@@ -99,7 +99,7 @@ export default function PhishingCourse(textSizeProps: TextSizeProps) {
           Turvassa Verkossa
         </Link>
         <div className="nav-actions">
-          <Link to="/">← Takaisin aiheisiin</Link>
+          <Link to="/course/phishing">← Takaisin aiheisiin</Link>
           <TextSizeControl {...textSizeProps} />
         </div>
       </nav>
@@ -248,7 +248,6 @@ export default function PhishingCourse(textSizeProps: TextSizeProps) {
                   omasta sovelluksesta tai tutusta puhelinnumerosta. Ilmoita
                   viesti roskapostiksi tai tietojenkalasteluksi.
                 </p>
-                <Link to="/">Palaa aiheisiin →</Link>
               </section>
             )}
             <p className={styles.small}>
