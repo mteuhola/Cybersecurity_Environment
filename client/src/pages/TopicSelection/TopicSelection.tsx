@@ -48,6 +48,9 @@ export default function TopicSelection({
                     </span>
                     <div className={styles.content}>
                       <h3>{topic.title}</h3>
+                      {topic.kind === "quiz" && (
+                        <span>Kurssin lopputehtävä</span>
+                      )}
                       {topic.isComplete && <CompletionBadge />}
                       <p>{topic.description}</p>
                     </div>

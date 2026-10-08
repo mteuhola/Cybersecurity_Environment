@@ -18,15 +18,15 @@ test("fresh courses and topics are incomplete, including empty courses", () => {
       .every((topic) => !topic.isComplete),
   );
   assert.equal(
-    courses.find((course) => course.id === "romance-fraud").topics.length,
-    0,
+    applyProgress([], [{ ...topicCourses[0], topics: [] }])[0].isComplete,
+    false,
   );
 });
 
 test("completion updates only the correct topic and course", () => {
   const courses = applyProgress(completeTopic([], password));
   assert.equal(courses[0].topics[0].isComplete, true);
-  assert.equal(courses[0].isComplete, true);
+  assert.equal(courses[0].isComplete, false); // The final quiz remains incomplete.
   assert.equal(courses[1].isComplete, false);
   assert.equal(courses[1].topics[0].isComplete, false);
   assert.equal(
@@ -42,7 +42,7 @@ test("repeating a topic never duplicates or removes completion", () => {
   assert.strictEqual(completeTopic(completed, "/unknown"), completed);
   assert.equal(
     applyProgress(completed).filter((course) => course.isComplete).length,
-    2,
+    0,
   );
 });
 

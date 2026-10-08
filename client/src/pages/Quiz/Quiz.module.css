@@ -1,0 +1,203 @@
+.root {
+  min-height: 100vh;
+  background: #f7f5f0;
+  color: #1a1a18;
+  font-family: "DM Sans", sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.root * {
+  box-sizing: border-box;
+}
+.root a {
+  color: var(--course-ink);
+  text-underline-offset: 4px;
+}
+.root a:focus-visible,
+.root button:focus-visible,
+.root input:focus-visible,
+.root h2:focus-visible {
+  outline: 3px solid var(--course-ink);
+  outline-offset: 4px;
+}
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 32px;
+  border-top: 4px solid var(--course-accent);
+  border-bottom: 1px solid #d6d3ca;
+}
+.nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.brand {
+  font-family: "DM Serif Display", serif;
+  font-size: 1.5rem;
+}
+.main {
+  max-width: 900px;
+  margin: auto;
+  padding: 40px 32px;
+}
+.eyebrow {
+  color: var(--course-ink);
+  font-weight: 500;
+}
+.root h1,
+.root h2 {
+  font-family: "DM Serif Display", serif;
+  font-weight: 400;
+  line-height: 1.25;
+}
+.root h1 {
+  font-size: clamp(2rem, 2rem + 1vw, 2.875rem);
+}
+.root h2 {
+  font-size: 1.75rem;
+  color: var(--course-ink);
+  margin-top: 0;
+}
+.progress {
+  margin: 24px 0;
+}
+.progress p {
+  margin-bottom: 8px;
+}
+.progress progress {
+  width: 100%;
+  height: 14px;
+  accent-color: var(--course-ink);
+}
+.card {
+  padding: 28px;
+  background: #fff;
+  border: 1px solid #d6d3ca;
+  border-top: 4px solid var(--course-accent);
+  border-radius: 16px;
+}
+.options {
+  min-width: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.options legend {
+  padding: 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+.instructions {
+  color: var(--course-ink);
+  margin: 12px 0 20px;
+}
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+  margin-bottom: 12px;
+  min-height: 56px;
+  border: 2px solid #d6d3ca;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.option:hover {
+  border-color: var(--course-ink);
+}
+.option[data-selected="true"] {
+  border-color: var(--course-ink);
+  background: var(--course-tint);
+}
+.option:focus-within {
+  outline: 2px solid var(--course-ink);
+  outline-offset: 3px;
+}
+.option input {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  margin: 3px 0 0;
+  accent-color: var(--course-ink);
+}
+.options:disabled .option {
+  cursor: default;
+}
+.feedback {
+  padding: 16px;
+  background: var(--course-tint);
+  color: var(--course-notice-ink);
+  border-left: 4px solid var(--course-accent);
+  border-radius: 8px;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  margin-top: 24px;
+}
+.root button {
+  min-height: 48px;
+  padding: 10px 18px;
+  font: inherit;
+  border: 2px solid var(--course-ink);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--course-ink);
+  cursor: pointer;
+}
+.root button:hover {
+  background: var(--course-tint);
+}
+.root button.primary {
+  color: #fff;
+  background: var(--course-ink);
+}
+.root button.primary:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.root button:disabled {
+  background: #f0efeb;
+  color: #53524d;
+  border-color: #b8b5ad;
+  cursor: not-allowed;
+  text-decoration: none;
+}
+.passwordLabel {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.password {
+  width: 100%;
+  min-height: 56px;
+  padding: 12px;
+  font: inherit;
+  border: 2px solid #73716b;
+  border-radius: 8px;
+}
+.reveal {
+  margin-top: 12px;
+}
+.small {
+  font-size: 1rem;
+  color: #53524d;
+}
+@media (max-width: 600px) {
+  .main {
+    padding: 28px 16px;
+  }
+  .nav {
+    padding: 16px;
+  }
+  .card {
+    padding: 20px;
+  }
+}

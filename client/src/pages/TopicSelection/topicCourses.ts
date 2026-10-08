@@ -1,4 +1,5 @@
 export interface CourseTopic {
+  kind?: "activity" | "quiz";
   id: string;
   isComplete: boolean;
   title: string;
@@ -14,7 +15,7 @@ export interface TopicCourse {
   topics: CourseTopic[];
 }
 
-export const topicCourses: TopicCourse[] = [
+const courseCatalog: TopicCourse[] = [
   {
     id: "passwords",
     isComplete: false,
@@ -55,3 +56,20 @@ export const topicCourses: TopicCourse[] = [
     topics: [],
   },
 ];
+
+// A final quiz is a topic, so existing progress calculations include it automatically.
+export const topicCourses: TopicCourse[] = courseCatalog.map((course) => ({
+  ...course,
+  topics: [
+    ...course.topics,
+    {
+      id: "quiz",
+      kind: "quiz",
+      isComplete: false,
+      title: "Kurssin tietovisa",
+      description:
+        "Kertaa kurssin asioita. Valitse oikeat vastaukset ja lue selitykset omaan tahtiisi.",
+      path: `${course.path}/quiz`,
+    },
+  ],
+}));

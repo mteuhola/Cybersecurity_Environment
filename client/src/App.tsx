@@ -1,3 +1,4 @@
+import { courseQuizzes } from "./pages/Quiz/quizData";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import CourseSelection from "./pages/CourseSelection/CourseSelection";
@@ -12,6 +13,8 @@ const PasswordCourse = lazy(
 const PhishingCourse = lazy(
   () => import("./pages/PhishingCourse/PhishingCourse"),
 );
+
+const Quiz = lazy(() => import("./pages/Quiz/Quiz"));
 
 function App() {
   const textSizeProps = useTextSize();
@@ -62,6 +65,24 @@ function App() {
             key={course.id}
             path={course.path}
             element={<TopicSelection course={course} {...textSizeProps} />}
+          />
+        ))}
+        {courses.map((course) => (
+          <Route
+            key={`${course.id}-quiz`}
+            path={`${course.path}/quiz`}
+            element={
+              <Suspense fallback={<p role="status">Ladataan tietovisaa…</p>}>
+                <Quiz
+                  key={course.id}
+                  course={course}
+                  quiz={courseQuizzes[course.id]}
+                  {...textSizeProps}
+                  isComplete={isComplete(`${course.path}/quiz`)}
+                  onComplete={() => markComplete(`${course.path}/quiz`)}
+                />
+              </Suspense>
+            }
           />
         ))}
       </Routes>
