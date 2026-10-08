@@ -39,6 +39,40 @@ export default function PhishingCourse(textSizeProps: TextSizeProps) {
   function renderEmailPart(id: (typeof emailParts)[number]["id"]) {
     const part = emailParts.find((item) => item.id === id)!;
     const discovered = found.includes(id);
+    if ("href" in part) {
+      const [prompt, linkText] = part.text.split(/(https?:\/\/\S+)/);
+      return (
+        <span
+          className={`${styles.emailPart} ${styles.emailLinkPart}`}
+          data-found={discovered}
+        >
+          <button
+            type="button"
+            className={styles.emailPartOverlay}
+            aria-label={`${part.label}: ${part.text}${discovered ? ". Varoitusmerkki löydetty." : ""}`}
+            onClick={() => inspect(part)}
+          />
+          {prompt}
+          <a
+            href={part.href}
+            className={styles.emailLink}
+            onClick={(event) => {
+              event.preventDefault();
+              inspect(part);
+            }}
+            onAuxClick={(event) => event.preventDefault()}
+          >
+            {linkText}
+          </a>
+          {discovered && (
+            <span className={styles.found} aria-hidden="true">
+              {" "}
+              ✓ Löydetty
+            </span>
+          )}
+        </span>
+      );
+    }
     return (
       <button
         ref={id === "subject" ? firstPart : undefined}
@@ -77,12 +111,11 @@ export default function PhishingCourse(textSizeProps: TextSizeProps) {
             Tutki sähköpostia ja etsi sen {clues.length} varoitusmerkkiä.
             Valitse epäilyttävä kohta suoraan viestistä. Voit tutkia aihetta,
             lähettäjää, viestin tekstiä ja liitettä. Kaikki valittavat kohdat
-            eivät ole varoitusmerkkejä. Näppäimistöllä voit liikkua sarkaimella
-            ja valita Enterillä.
+            eivät ole varoitusmerkkejä.
           </p>
           <p className={styles.notice}>
             <strong>Tämä on kuvitteellinen harjoitus.</strong> Pankin osoite on
-            tässä esimerkissä <strong>aurinkopankki.example</strong>. Valinnat
+            tässä esimerkissä <strong>tonttupankki.example</strong>. Valinnat
             eivät avaa linkkejä tai liitteitä. Voit kokeilla rauhassa ilman
             aikarajaa.
           </p>
@@ -110,7 +143,7 @@ export default function PhishingCourse(textSizeProps: TextSizeProps) {
             </div>
             <div className={styles.emailBody}>
               {(
-                ["greeting", "request", "link", "secrecy", "signature"] as const
+                ["greeting", "request", "attachmentInstructions", "link", "fakeLink", "secrecy", "signature"] as const
               ).map((id) => (
                 <p key={id} className={styles.emailParagraph}>
                   {renderEmailPart(id)}
@@ -205,13 +238,13 @@ export default function PhishingCourse(textSizeProps: TextSizeProps) {
               >
                 <h3 id="complete-title">Kaikki merkit löytyivät!</h3>
                 <p>
-                  Hienoa työtä! Harjoittelit pysähtymistä ja viestin
+                  Hienoa työtä! Harjoittelit viestin
                   tarkistamista. Oikeassa huijausviestissä voi olla vain yksi
                   näistä merkeistä tai aivan erilaisia merkkejä.
                 </p>
                 <p>
-                  <strong>Turvallinen seuraava askel:</strong> älä vastaa, avaa
-                  liitettä tai käytä viestin linkkiä. Tarkista asia pankin
+                  <strong>Turvallinen lähestymistapa:</strong> Epäillessäsi viestin aitoutta,
+                  älä vastaa, avaa liitettä tai klikkaa viestin linkkiä. Tarkista asia pankin
                   omasta sovelluksesta tai tutusta puhelinnumerosta. Ilmoita
                   viesti roskapostiksi tai tietojenkalasteluksi.
                 </p>

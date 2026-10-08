@@ -187,6 +187,23 @@
   text-decoration: underline;
   text-underline-offset: 4px;
 }
+.emailLinkPart {
+  position: relative;
+}
+.emailPartOverlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+.emailLinkPart .emailLink {
+  position: relative;
+}
 .found {
   display: inline;
   color: #0c447c;

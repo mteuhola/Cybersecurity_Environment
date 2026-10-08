@@ -2,21 +2,21 @@ export const emailParts = [
   {
     id: "sender",
     label: "Lähettäjä",
-    text: "Aurinkopankki <turva@aurinkopankki-tarkistus.example>",
+    text: "Tonttupankki <turva@tonttupankki-tarkistus.example>",
     suspicious: true,
     title: "Lähettäjän osoite",
     explanation:
-      "Näyttönimi voi olla mikä tahansa. Lähettäjän verkkotunnus aurinkopankki-tarkistus.example eroaa harjoituksen pankin osoitteesta aurinkopankki.example. Myöskään tutulta näyttävä lähettäjä ei yksin takaa aitoutta.",
+      "Näyttönimi voi olla mikä tahansa. Lähettäjän verkkotunnus tonttupankki-tarkistus.example eroaa harjoituksen pankin osoitteesta tonttupankki.example. Myöskään tutulta näyttävä lähettäjä ei yksin takaa aitoutta.",
     hint: "Vertaa lähettäjän @-merkin jälkeistä osaa pankin osoitteeseen.",
   },
   {
     id: "subject",
     label: "Aihe",
-    text: "Tilisi suljetaan 30 minuutin kuluttua – toimi heti!",
+    text: "Tietoturvapäivitys - Tilisi vaatii välitöntä toimintaa",
     suspicious: true,
     title: "Kiire ja uhkaus",
     explanation:
-      "Tilin sulkemisella uhkaaminen ja lyhyt määräaika painostavat toimimaan tarkistamatta. Pysähdy ja tarkista asia itse pankin sovelluksesta tai tutusta yhteystiedosta.",
+      "Otsikoissa olevat vaatimukset painostavat toimimaan tarkistamatta. Pysähdy ja tarkista asia itse pankin sovelluksesta tai tutusta yhteystiedosta.",
     hint: "Yrittääkö viestin aihe saada sinut toimimaan kiireessä?",
   },
   {
@@ -32,22 +32,43 @@ export const emailParts = [
   {
     id: "request",
     label: "Viesti",
-    text: "Havaitsimme tililläsi poikkeavaa toimintaa. Vastaa tähän viestiin verkkopankin käyttäjätunnuksellasi, salasanallasi ja puhelimeesi tulevalla vahvistuskoodilla.",
+    text: "Olemme aloittaneet uuden tietoturvapäivityksen käyttöönoton palvelussamme. Taataksemme kaikkien tiliemme turvallisuuden, sinun tulee vahvistaa henkilöllisyytesi, kirjautua sisään palveluun, ja suorittaa vaadittavat toimenpiteet. Vaihtoehtoisesti voit vastata tähän viestiin lähettämällä salasanasi ja kirjautumisen vahvistuskoodin, jolloin voimme hoitaa asian puolestasi.",
     suspicious: true,
     title: "Salaisten tietojen pyyntö",
     explanation:
-      "Salasanaa tai kirjautumisen vahvistuskoodia ei pidä lähettää sähköpostissa. Niillä huijari voisi päästä tilillesi. Älä vastaa pyyntöön.",
+      "Salasanaa tai kirjautumisen vahvistuskoodia ei pidä lähettää sähköpostissa, eivätkä pankit koskaan utele tunnuksiasi. Niillä huijari voisi päästä tilillesi. Älä vastaa pyyntöön.",
     hint: "Mitä tietoja sinua pyydetään lähettämään vastauksessa?",
   },
   {
+    id: "attachmentInstructions",
+    label: "Viesti",
+    text: "Asennathan laitteeseesi tämän viestin liitteenä tulevan turvapäivitystiedoston mahdollisimman pian, jotta laitteesi ja tilisi pysyvät suojattuna.",
+    suspicious: true,
+    title: "Ohjeet liitteen asentamiseen",
+    explanation:
+      "Viesti kehottaa asentamaan liitteessä olevan ohjelman vetoamalla asennuksen pakollisuuteen. Odottamaton ohjelma voi kuitenkin olla haitallinen. Älä asenna sitä.",
+    hint: "Kehottaanko viesti asentamaan liitteen?",
+  },
+  {
     id: "link",
-    label: "Linkki ja sen kohde (harjoituksessa näkyvissä)",
-    text: "Vahvista tilisi → https://aurinkopankki-turva.example/kirjaudu",
+    label: "Linkki ja sen kohde",
+    text: "Vahvista tilisi: https://tonttupankki-turva.example/kirjaudu",
     suspicious: true,
     title: "Väärään osoitteeseen vievä linkki",
     explanation:
-      "Linkin osoite ei ole harjoituksen pankin aurinkopankki.example. Pankin nimi osoitteen osana tai https-alku ei takaa aitoutta. Avaa pankin sovellus tai kirjoita tuntemasi osoite itse.",
+      "Linkin osoite ei ole harjoituksen pankin tonttupankki.example. Pankin nimi osoitteen osana tai https-alku ei takaa aitoutta. Avaa pankin sovellus tai kirjoita tuntemasi osoite itse.",
     hint: "Vertaa linkin verkkotunnusta harjoituksen pankin osoitteeseen.",
+  },
+  {
+    id: "fakeLink",
+    label: "Linkki ja sen kohde (huijauslinkki)",
+    text: "Vaihtoehtoisesti voit kirjautua sisään tästä: https://tonttupankki.example/kirjaudu",
+    href: "https://omituinenosoite.fi/huijaus",
+    suspicious: true,
+    title: "Näennäisesti oikeaan osoitteeseen vievä linkki, mutta ohjaa kuitenkin väärään kohteeseen",
+    explanation:
+      "Itse linkki näyttää vievän oikeaan osoitteeseen, mutta liikuttaessa hiiren osoittimella linkin päälle selaimen alareunassa näkyy väärä osoite. Tarkista linkin kohde ennen kuin klikkaat sitä.",
+    hint: "Vertaa jälkimmäisen linkin kohdetta selaimen alareunassa näkyvään osoitteeseen.",
   },
   {
     id: "attachment",
@@ -62,7 +83,7 @@ export const emailParts = [
   {
     id: "secrecy",
     label: "Lisäohje",
-    text: "Älä soita pankin asiakaspalveluun tai kerro tästä läheisillesi. Yhteydenotto keskeyttää tilisi suojaamisen.",
+    text: "Pankin verkkosivut ovat poissa käytöstä sekä asiakaspalvelunumero on hyvin kiireinen päivityksen vuoksi, joten emme suosittele soittamista tai verkkosivulla vierailua.",
     suspicious: true,
     title: "Tarkistamisen estäminen",
     explanation:
@@ -72,7 +93,7 @@ export const emailParts = [
   {
     id: "signature",
     label: "Allekirjoitus",
-    text: "Ystävällisin terveisin, Aurinkopankin asiakaspalvelu",
+    text: "Ystävällisin terveisin, Tonttupankin asiakaspalvelu",
     suspicious: false,
     title: "Asiallinen allekirjoitus",
     explanation:
